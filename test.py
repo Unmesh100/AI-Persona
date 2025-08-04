@@ -1,7 +1,7 @@
 import dill
 import spacy
 
-nlp = spacy.load("en_core_web_sm")
+nlp = spacy.load("en_core_web_sm") 
 
 # Load the functions dictionary from the pickle file
 with open('model.pkl', 'rb') as f:
