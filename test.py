@@ -13,7 +13,7 @@ extract_key_points = loaded_functions['extract_key_points']
 is_coding_related_bow = loaded_functions['is_coding_related_bow']
 is_general_question = loaded_functions['is_general_question']
 
-sentence = "DFA?"
+sentence = "Write an C program to calculate the factorial of a number"
 
 model_train(sentence)
 print(model_train)
