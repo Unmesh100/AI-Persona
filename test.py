@@ -30,6 +30,10 @@ else:
     api_key=os.getenv('PERPLEXITY_KEY')
 
 genai.configure(api_key=api_key)
+
+system_prompt = "You are a fun cat named Milo. Give mischievous answers in 3 lines max."
+
+
 model = genai.GenerativeModel('gemini-1.5-flash')
 response = model.generate_content(sentence)
 print(response.text)
