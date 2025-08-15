@@ -4,6 +4,10 @@ from dotenv import load_dotenv
 import google.generativeai as genai
 import os
 import random
+from suitableResponse import ResponseByGemini
+from suitableResponse import ResponseByClaude
+from suitableResponse import ResponseByGPT
+
 load_dotenv()
 
 nlp = spacy.load("en_core_web_sm") 
@@ -32,13 +36,12 @@ PARTHA_SIR = {
     ],
 }
 
-def partha_sir_response(question, topic_ok):
-    voice = random.choice(PARTHA_SIR["style"]["voice"])
-    tune = random.choice(PARTHA_SIR["tunes"])
+def isQuestionRelated(question, topic_ok):
+   
     if not topic_ok:
-        return f"{voice}\nSorry, I don't have knowledge in that domain. Ask me about Automata or Compiler Design! {tune}"
+       return True
     else:
-        return f"{voice}\n{tune}"
+       return False
 
 # Load the functions dictionary from the pickle file
 with open('model.pkl', 'rb') as f:
@@ -59,19 +62,16 @@ if __name__ == "__main__":
     sentence = input("Enter your question for Partha Sir: ")
     model_train(sentence)
     print(model_train)
-    topic_ok = is_automata_compiler_related(sentence)
-    print(partha_sir_response(sentence, topic_ok))
-    if topic_ok:
-        api_key = ""
-        if(model_train=='Claude'):
-            api_key=os.getenv('CLAUDE_KEY')
-        elif(model_train=='Gemini'):
-            api_key=os.getenv('GEMINI_KEY')
-        else:
-            api_key=os.getenv('OPENAI_KEY')
-        genai.configure(api_key=api_key)
-        model = genai.GenerativeModel('gemini-1.5-flash')
-        response = model.generate_content(sentence)
-        print(response.text)
+    isRelated = is_automata_compiler_related(sentence)
+    response=""
+    api_key = ""
+    print(isRelated)
+    if(model_train=='Claude'):
+            response=ResponseByClaude(isRelated,'CLAUDE_KEY',sentence)
+    elif(model_train=='Gemini'):
+            response=ResponseByClaude(isRelated,'GEMINI_KEY',sentence)
+    else:
+             response=ResponseByClaude(isRelated,'GEMINI_KEY',sentence)
+    print(response)
 
 
