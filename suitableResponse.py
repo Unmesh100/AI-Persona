@@ -38,7 +38,7 @@ def ResponseByGemini(isRelated,myKey,Question):
        tunes_string = "\n".join(PARTHA_SIR["tunes"])
        traits = "\n".join( PARTHA_SIR["style"]["traits"])
        voice="\n".join(PARTHA_SIR["style"]['voice'])
-       myQuestion="The person does not know the answer to a particular question generate a suitable response based on the {voice} that the person might give .Give only one option" if isRelated==False else f"Please tell me how the person will reply to this question :{Question} Generate this response similar to this {voice}"
+       myQuestion="The person does not know the answer to a particular question generate a suitable response based on the {voice} that the person might give .Give only one option" if isRelated==False else f"Please tell me how the person will reply to this question :{Question} Generate this response similar to this {voice} the answer should be detailed"
        sentence=f"This is the person's bio:{bio} The person is has the following Tunes :{tunes_string} The person has the following traits :{traits} The person has the following voices: {voice}  {myQuestion}"
        response = model.generate_content(sentence)
        return response.text
@@ -52,7 +52,7 @@ def ResponseByClaude(isRelated,myKey,Question):
        tunes_string = "\n".join(PARTHA_SIR["tunes"])
        traits = "\n".join( PARTHA_SIR["style"]["traits"])
        voice="\n".join(PARTHA_SIR["style"]['voice'])
-       myQuestion="The person does not know the answer to a particular question generate a suitable response based on the {voice} that the person might give .Give only one option" if isRelated==False else f"Please tell me how the person will reply to this question :{Question} Generate this response similar to this {voice}"
+       myQuestion="The person does not know the answer to a particular question generate a suitable response based on the {voice} that the person might give .Give only one option" if isRelated==False else f"Please tell me how the person will reply to this question :{Question} Generate this response similar to this {voice} the answer should be detailed"
        sentence=f"This is the person's bio:{bio} The person is has the following Tunes :{tunes_string} The person has the following traits :{traits} The person has the following voices: {voice}  {myQuestion}"
        response = model.generate_content(sentence)
        return response.text
@@ -66,7 +66,7 @@ def ResponseByGPT(isRelated,myKey,Question):
        tunes_string = "\n".join(PARTHA_SIR["tunes"])
        traits = "\n".join( PARTHA_SIR["style"]["traits"])
        voice="\n".join(PARTHA_SIR["style"]['voice'])
-       myQuestion="The person does not know the answer to a particular question generate a suitable response based on the {voice} that the person might give .Give only one option" if isRelated==False else f"Please tell me how the person will reply to this question :{Question} Generate this response similar to this {voice}"
+       myQuestion="The person does not know the answer to a particular question generate a suitable response based on the {voice} that the person might give .Give only one option" if isRelated==False else f"Please tell me how the person will reply to this question :{Question} Generate this response similar to this{voice} the answer should be detailed"
        sentence=f"This is the person's bio:{bio} The person is has the following Tunes :{tunes_string} The person has the following traits :{traits} The person has the following voices: {voice}  {myQuestion}"
        response = model.generate_content(sentence)
        return response.text
