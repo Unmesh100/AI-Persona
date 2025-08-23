@@ -4,6 +4,26 @@ from dotenv import load_dotenv
 import google.generativeai as genai
 import os
 import random
+import requests
+import tempfile
+import webbrowser
+
+def speak_partha(text):
+    api_key = "sk_2dd59368f0137d43c58305bef2fd6142019d38f66ffe41e4"
+    voice_id = "878Ok6ypLdMSdI2Bl1ri"  # Your actual ElevenLabs voice ID
+    url = f"https://api.elevenlabs.io/v1/text-to-speech/{voice_id}"
+    headers = {
+        "xi-api-key": api_key,
+        "Content-Type": "application/json"
+    }
+    data = {"text": text, "model_id": "eleven_multilingual_v2"}
+    response = requests.post(url, headers=headers, json=data)
+    if response.status_code == 200:
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as f:
+            f.write(response.content)
+            webbrowser.open(f.name)
+    else:
+        print("Error from ElevenLabs API:", response.text)
 from suitableResponse import ResponseByGemini
 from suitableResponse import ResponseByClaude
 from suitableResponse import ResponseByGPT
@@ -73,23 +93,20 @@ is_general_question = loaded_functions['is_general_question']
 
 
 def is_automata_compiler_related(text):
-    keywords = ["automata", "compiler", "turing", "dfa", "nfa", "parsing", "syntax", "lexical", "finite state", "grammar"]
+    keywords = ["automata", "compiler", "turing", "dfa", "nfa", "parsing", "parser", "syntax", "lexical", "finite state", "grammar"]
     return any(kw in text.lower() for kw in keywords)
 
 if __name__ == "__main__":
     sentence = input("Enter your question for Partha Sir: ")
-    #model_train(sentence)
-    #print(model_train)
+    model_train(sentence)
     isRelated = is_automata_compiler_related(sentence)
-    response=""
-    api_key =""
-    #print(isRelated)
     if(model_train=='Claude'):
-            response=ResponseByClaude(isRelated,'CLAUDE_KEY',sentence)
+        response=ResponseByClaude(isRelated,'CLAUDE_KEY',sentence)
     elif(model_train=='Gemini'):
-            response=ResponseByClaude(isRelated,'GEMINI_KEY',sentence)
+        response=ResponseByClaude(isRelated,'GEMINI_KEY',sentence)
     else:
-             response=ResponseByClaude(isRelated,'GEMINI_KEY',sentence)
+        response=ResponseByClaude(isRelated,'GEMINI_KEY',sentence)
     print(response)
+    speak_partha(str(response))
 
 
