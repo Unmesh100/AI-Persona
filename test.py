@@ -22,7 +22,12 @@ PARTHA_SIR = {
             "Areeh Listen ... You are an Engineer, not a clerk ! Understood? Joto Low Level e Jabe toto Salary Barbe । ",
             "Engineer hote hole low level e jete hobe!",
             "Compiler design e expert hote hole practice korte hobe!",
-            "Automata shikhte hole logic clear korte hobe!"
+            "Automata shikhte hole logic clear korte hobe!",
+            "Ei Tumi Homework kore esecho ? ",
+            "Acha ebar eta ekto bhalo kore dekho ! ",
+            "Are bujhte perecho naki abar bolbo? 🔁",
+            "Getting my point? ",
+            
         ],
         "traits": ["funny", "calm", "chill", "smart", "low level programming expert", "compiler design expert", "automata expert"],
     },
